@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<title>cJS - Module-Test</title>
+		<script type="text/javascript" src="../lib/require.js"></script>
+		<script type="text/javascript" src="../lib/cJS.js"></script>
+		<script type="text/javascript">
+			requirejs.config(
+				{
+					baseUrl:"../testLibs"
+				}	
+			);
+
+			function Example(){
+				this.value="";
+				
+				this.get=function(event){
+					var func=function(controller){
+						return function(module){
+							controller.value=module.blubb();
+						};
+					};
+
+					this.cjsGetModule("Test",func(this));
+				};
+			}
+		</script>
+	</head>
+	<body>
+		<div cjs-controller="test:Example">			
+			<input type="button" value="write blubb" cjs-binding-event="click:get"/><br/>
+			<span cjs-binding-value="value"></span>			
+		</div>
+	</body>
+</html>

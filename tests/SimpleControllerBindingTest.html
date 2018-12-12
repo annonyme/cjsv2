@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<title>cJS - Controller-Test</title>
+		<script type="text/javascript" src="../lib/cJS.js"></script>
+		<script type="text/javascript">
+			function Example(){
+				this.value=0;
+			}
+		</script>
+	</head>
+	<body>
+		<div cjs-controller="test:Example">
+			<span cjs-binding-value="value"></span><br/>
+			<input type="text" value="" placeholder="insert a text" cjs-binding-value="value"/>
+		</div>
+	</body>
+</html>

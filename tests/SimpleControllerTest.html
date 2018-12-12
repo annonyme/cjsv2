@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title>cJS - Controller-Test</title>
+		<script type="text/javascript" src="../lib/cJS.js"></script>
+		<script type="text/javascript">
+			function Example(){
+				this.value=0;
+				
+				this.add=function(event){
+					this.value++;
+					console.log("Example add +1: "+this.value);
+				};
+			}
+		</script>
+	</head>
+	<body>
+		<div cjs-controller="test:Example">
+			<input type="number" value="0" cjs-binding-value="value"/>
+			<input type="button" value="add +1" cjs-binding-event="click:add"/>
+		</div>
+	</body>
+</html>

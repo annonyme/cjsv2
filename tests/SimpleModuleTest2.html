@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<title>cJS - Controller-Test</title>
+		<script type="text/javascript" src="../lib/require.js"></script>
+		<script type="text/javascript" src="../lib/cJS.js"></script>
+		<script type="text/javascript">
+			requirejs.config(
+				{
+					baseUrl:"../testLibs"
+				}	
+			);
+		</script>
+	</head>
+	<body>
+		<div cjs-require-controller="test:Example">
+			<input type="number" value="0" cjs-binding-value="value"/>
+			<input type="button" value="add +1" cjs-binding-event="click:add"/>
+		</div>
+	</body>
+</html>
