@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title>cJS - Controller-Test</title>
+		<script type="text/javascript" src="../lib/cJS.js"></script>
+		<script type="text/javascript">
+			function Example(){
+                this.list;
+                
+				this.init = function(){
+                    let values = ["Wing Commander 3", "Sim City 2000", "Duke Nukem 3D", "Warcraft 2"];
+                    this.appendChildren(this.list, values.map(item => {
+                        let element = document.createElement("li");
+                        element.appendChild(document.createTextNode(item));
+                        return element
+                    }));
+				};
+			}
+		</script>
+	</head>
+	<body>
+		<div cjs-controller="test:Example:init">
+			<ul cjs-binding-element="list"></ul>
+		</div>
+	</body>
+</html>
