@@ -9,19 +9,17 @@
 
 				this.init = function(){
 					this.watchers = [
-						{
-							fieldname: "value",
-							handler: (target, property, value) => {console.log("new value: " + value);}
-						}
-					];
+						{fieldname: "value", handler: (target, property, value) => {console.log("new time value: " + value);}}
+                    ];
+                    
+                    setInterval(() => {this.value = Date.now()}, 1000);
 				};
 			}
 		</script>
 	</head>
 	<body>
 		<div cjs-controller="test:Example:init">
-			<span cjs-binding-value="value"></span><br/>
-			<input type="text" value="" placeholder="insert a text" cjs-binding-value="value"/>
+			Time: <span cjs-binding-value="value"></span>
 		</div>
 	</body>
 </html>
