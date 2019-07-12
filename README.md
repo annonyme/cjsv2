@@ -108,3 +108,33 @@ function Controller(){
     <button cjs-binding-event="click:do">click me!</button>
 </div>
 ```
+
+### Using Templates
+
+```
+function Example(){
+    this.value=0;
+    
+    this.template = '<div><input type="button" value="add +1" cjs-binding-event="click:add"/></div>';
+    
+    this.add=function(event){
+        this.value++;
+        console.log("Example add +1: "+this.value);
+    };
+    
+    this.init = function() {
+        doc = new DOMParser().parseFromString(this.template, "text/html");                    
+        cjs.findEventBindings(this.cJSParentWrapper, doc);
+        let element = document.getElementById("button");			
+        let copy = doc.firstChild;			
+        element.appendChild(copy);
+    }
+}
+```
+
+```
+<div cjs-controller="test:Example:init">
+    <input type="number" value="0" cjs-binding-value="value"/>
+    <div id="button"></div>
+</div>
+```
