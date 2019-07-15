@@ -14,10 +14,8 @@
                 };
                 
                 this.init = function() {
-                    doc = new DOMParser().parseFromString(this.template, "text/html");	
-                    
+                    doc = new DOMParser().parseFromString(this.template, "text/html");                    
                     cjs.findEventBindings(this.cJSParentWrapper, doc);
-
                     let element = document.getElementById("button");			
                     let copy = doc.firstChild;			
                     element.appendChild(copy);
@@ -28,9 +26,7 @@
 	<body>
 		<div cjs-controller="test:Example:init">
 			<input type="number" value="0" cjs-binding-value="value"/>
-			<div id="button">
-
-            </div>
+			<div id="button"></div>
 		</div>
 	</body>
 </html>

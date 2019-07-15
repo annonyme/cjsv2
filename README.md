@@ -12,6 +12,8 @@ It is inspired by AngularJS, Vue.js (till V2) and a little bit by JavaFX.
 
 ---
 
+Integrates fine with https://github.com/json-editor/json-editor for form-generation
+
 ## Examples
 
 ### Simple Controller

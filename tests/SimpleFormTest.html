@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<title>cJS - Controller-Test</title>
+        <script type="text/javascript" src="../lib/cJS.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
+		<script type="text/javascript">
+			function Example(){
+                this.editor;
+                this.element;
+                
+				this.init = function(){
+                    this.editor = new JSONEditor(this.element, {
+                        theme: 'bootstrap3',
+                        disable_edit_json: true,
+                        disable_collapse: true,
+                        disable_properties: true,
+                        schema: {
+                            type: "object",
+                            title: "Car",
+                            properties: {
+                                make: {
+                                    type: "string",
+                                    enum: [
+                                        "Toyota",
+                                        "BMW",
+                                        "Honda",
+                                        "Ford",
+                                        "Chevy",
+                                        "VW"
+                                    ]
+                                },
+                                model: {
+                                    type: "string"
+                                },
+                                year: {
+                                    type: "integer",
+                                    enum: [
+                                        1995,1996,1997,1998,1999,
+                                        2000,2001,2002,2003,2004,
+                                        2005,2006,2007,2008,2009,
+                                        2010,2011,2012,2013,2014
+                                    ],
+                                    default: 2008
+                                },
+                                safety: {
+                                    type: "integer",
+                                    format: "rating",
+                                    maximum: "5",
+                                    exclusiveMaximum: false,
+                                    readonly: false
+                                }
+                            }
+                        }
+                    });
+                };
+                
+                this.read = function() {
+                    console.log(this.editor.getValue());
+                }
+			}
+		</script>
+	</head>
+	<body>
+		<div cjs-controller="test:Example:init" class="container">
+			<div cjs-binding-element="element" id='editor_holder'></div>
+            <button id='submit' cjs-binding-event="click:read">Test console.log()</button>
+		</div>
+	</body>
+</html>
