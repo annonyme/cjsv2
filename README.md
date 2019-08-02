@@ -141,7 +141,7 @@ function Example(){
 </div>
 ```
 
-### Register a component by the main-controller and include it into the DOM
+### Register a component and include it into the DOM
 ```
 let component = {
     name: "component",
