@@ -140,3 +140,33 @@ function Example(){
     <div id="button"></div>
 </div>
 ```
+
+### Register a component by the main-controller and include it into the DOM
+```
+let component = {
+    name: "component",
+    controller: {
+        value: 0
+    },
+    initMethod: null,
+    template: "<div>Hello I am a Component! (<span cjs-binding-value=\"value\"></span>)</div>"            
+};
+
+function Main(){
+    this.cJSElement;   
+
+    this.click = function(){
+        this.cjsGetController("component").value++;
+    };
+
+    this.init=function(){
+        cjs.registerComponentObject(component);
+        this.cJSElement.appendChild(this.cjsGetController("component").cJSElement);
+    }
+}
+```
+
+```
+<div cjs-controller="main:Main:init">
+</div>
+```
