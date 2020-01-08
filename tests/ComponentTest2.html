@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<title>cJS - Controller-Test</title>
+		<script type="text/javascript" src="../lib/cJS.js"></script>
+        <script type="text/javascript">
+            let component = {
+                name: "component",
+                controller: {
+                    value: 0,                    
+                    click : function() {
+                        alert("component alert!");
+                    }
+                },
+                initMethod: null,
+                template: "<div><strong>Hello I am a Component! (Value: <span cjs-binding-value=\"value\"></span> <button cjs-binding-event=\"click:click\">alert</button>)</strong></div>"            
+            };
+			
+            function Main(){
+                this.left;
+                this.right;
+
+                this.toggle = true;    
+
+                this.click = function(){
+                    this.cjsGetController("component").value++;
+                    console.log(this.cjsGetController("component").cJSElement);
+                    if(this.toggle){
+                        this.left.appendChild(this.cjsGetController("component").cJSElement);
+                    }
+                    else {
+                        this.right.appendChild(this.cjsGetController("component").cJSElement);
+                    }
+                    this.toggle = !this.toggle;
+                };
+
+                this.init=function(){
+                    cjs.registerComponentObject(component);
+                }
+            }
+        </script>
+        <style>
+            td {
+                border: 1px solid black;
+            }
+        </style>
+	</head>
+	<body>
+        <table cjs-controller="main:Main:init">
+            <tr>
+                <th>Col1</th>
+                <th>Col2</th>
+            </tr>
+            <tr>
+                <td cjs-binding-element="left"></td>
+                <td cjs-binding-element="right"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button cjs-binding-event="click:click">move component!</button></td>
+            </tr>
+        </table>
+	</body>
+</html>
