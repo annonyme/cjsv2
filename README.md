@@ -170,3 +170,53 @@ function Main(){
 <div cjs-controller="main:Main:init">
 </div>
 ```
+
+### Using a service by injection
+```
+function AddService() {
+    this.addTwo = function(val) {
+        return val + 2;
+    }
+}
+
+function Example(){
+    this.value=0;
+
+    this.add=function(event){
+        this.value = this.AddService.addTwo(this.value);
+        console.log("Example add +2: "+this.value);
+    };
+}
+```
+
+```
+<div cjs-controller="test:Example" cjs-services="AddService">
+    <input type="number" value="0" cjs-binding-value="value"/>
+    <input type="button" value="add +2" cjs-binding-event="click:add"/>
+</div>
+```
+
+### Using a service by injection with different fieldname
+```
+function AddService() {
+    this.addTwo = function(val) {
+        return val + 2;
+    }
+}
+
+function Example(){
+    this.value=0;
+
+    this.add=function(event){
+        this.value = this.addy.addTwo(this.value);
+        console.log("Example add +2: "+this.value);
+    };
+}
+```
+
+```
+<div cjs-controller="test:Example" cjs-services="AddService:addy">
+    <input type="number" value="0" cjs-binding-value="value"/>
+    <input type="button" value="add +2" cjs-binding-event="click:add"/>
+</div>
+```
