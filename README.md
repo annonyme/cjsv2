@@ -3,12 +3,13 @@ cJSv2 is a simple JavaScript MVC-Framework for training purposes. It demonstrats
 
 * Selecting HTML-elements with specific attribute (QuerySelector)
 * Eventhandling for automatic value-binding
-* The JavaScript Proxy-implementation for automatic two-way value-bindung
+* The JavaScript Proxy-implementation for automatic two-way value-binding
 * Binding events of elements to controller-methods
+* Injecting singleton services to controllers 
 
-The framework is very lightweight and needs no dependencies or compiling-environments. The Framework has no real templating-engine, you can only bind values to the text-content of HTML-elements like _span_ or _i_.
+The framework is very lightweight (**less than 500 lines of code**) and needs no dependencies or compiling-environments. The Framework has no real templating-engine, you can only bind values to the text-content of HTML-elements like _span_ or _i_.
 
-It is inspired by AngularJS, Vue.js (till V2) and a little bit by JavaFX.
+It is inspired by AngularJS, Vue.js and a little bit by JavaFX.
 
 ---
 
@@ -168,5 +169,55 @@ function Main(){
 
 ```
 <div cjs-controller="main:Main:init">
+</div>
+```
+
+### Using a service by injection
+```
+function AddService() {
+    this.addTwo = function(val) {
+        return val + 2;
+    }
+}
+
+function Example(){
+    this.value=0;
+
+    this.add=function(event){
+        this.value = this.AddService.addTwo(this.value);
+        console.log("Example add +2: "+this.value);
+    };
+}
+```
+
+```
+<div cjs-controller="test:Example" cjs-services="AddService">
+    <input type="number" value="0" cjs-binding-value="value"/>
+    <input type="button" value="add +2" cjs-binding-event="click:add"/>
+</div>
+```
+
+### Using a service by injection with different fieldname
+```
+function AddService() {
+    this.addTwo = function(val) {
+        return val + 2;
+    }
+}
+
+function Example(){
+    this.value=0;
+
+    this.add=function(event){
+        this.value = this.addy.addTwo(this.value);
+        console.log("Example add +2: "+this.value);
+    };
+}
+```
+
+```
+<div cjs-controller="test:Example" cjs-services="AddService:addy">
+    <input type="number" value="0" cjs-binding-value="value"/>
+    <input type="button" value="add +2" cjs-binding-event="click:add"/>
 </div>
 ```
