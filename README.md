@@ -221,3 +221,59 @@ function Example(){
     <input type="button" value="add +2" cjs-binding-event="click:add"/>
 </div>
 ```
+
+### Implementing a Event-Bus with a service
+```
+function EventBus() {
+    this.services = [];
+    
+    this.register=function(event, callback){
+        if(!this.services[event]) {
+            this.services[event] = [];
+        }
+        this.services[event].push(callback);
+    }
+
+    this.fire=function(event, payload){
+        if(this.services[event]) {
+            this.services[event].forEach(subscriber => {
+                subscriber(payload);
+            })
+        }
+    }
+}
+
+function Receiver(){
+    this.value="";
+
+    this.init=function(){                
+        this.EventBus.register("update", (payload) => {
+            this.value = payload.value;
+        });
+        this.cjsPushBindings();
+    };
+}
+
+function Sender(){
+    this.values=[
+        'Blubb',
+        'Test',
+        'Brumm',
+        'Event',
+        'Something'
+    ];
+
+    this.send=function(event){
+        this.EventBus.fire("update", {value: this.values[Math.floor(Math.random() * this.values.length)]})
+    };
+}
+```
+
+```
+<div cjs-controller="sender:Sender:init" cjs-services="EventBus">
+    <input type="button" value="fire event" cjs-binding-event="click:send"/>
+</div>
+<div cjs-controller="receiver:Receiver:init" cjs-services="EventBus">
+    <input type="text" value="" cjs-binding-value="value"/>
+</div>
+```
