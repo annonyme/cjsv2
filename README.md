@@ -270,7 +270,7 @@ function Sender(){
 ```
 
 ```
-<div cjs-controller="sender:Sender:init" cjs-services="EventBus">
+<div cjs-controller="sender:Sender" cjs-services="EventBus">
     <input type="button" value="fire event" cjs-binding-event="click:send"/>
 </div>
 <div cjs-controller="receiver:Receiver:init" cjs-services="EventBus">
