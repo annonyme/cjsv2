@@ -1,5 +1,5 @@
 # cJSv2
-cJSv2 is a simple JavaScript MVC-Framework for training purposes. It demonstrats in a simple way the usage of:
+cJSv2 is a simple JavaScript MVC-Framework for training purposes. The **c** in cJS stands for controller. It demonstrats in a simple way the usage of:
 
 * Selecting HTML-elements with specific attribute (QuerySelector)
 * Eventhandling for automatic value-binding
@@ -225,18 +225,18 @@ function Example(){
 ### Implementing a Event-Bus with a service
 ```
 function EventBus() {
-    this.services = [];
+    this.events = [];
     
     this.register=function(event, callback){
-        if(!this.services[event]) {
-            this.services[event] = [];
+        if(!this.events[event]) {
+            this.events[event] = [];
         }
-        this.services[event].push(callback);
+        this.events[event].push(callback);
     }
 
     this.fire=function(event, payload){
-        if(this.services[event]) {
-            this.services[event].forEach(subscriber => {
+        if(this.events[event]) {
+            this.events[event].forEach(subscriber => {
                 subscriber(payload);
             })
         }
