@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>cJS - Controller-Test</title>
+    <script type="text/javascript" src="../lib/cJS.js"></script>
+    <script type="text/javascript">
+        function Example(){
+            this.value=0;
+
+            this.init=function(){
+                this.cjsAddWatcher('value', function(target, prop, val) {
+                    console.log('watcher: new ' + prop + ' is ' + val);
+                });
+            };
+
+            this.add=function(event){
+                this.value++;
+            };
+        }
+    </script>
+</head>
+<body>
+<div cjs-controller="test:Example:init">
+    <input type="number" value="0" cjs-binding-value="value"/>
+    <input type="button" value="add +1" cjs-binding-event="click:add"/>
+</div>
+</body>
+</html>
