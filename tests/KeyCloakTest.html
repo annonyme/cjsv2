@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KeyCloak-Test</title>
+    <script type="text/javascript" src="../lib/cJS.js"></script>
+    <script src="http://localhost:8080/auth/js/keycloak.js"></script>
+    <script type="text/javascript">
+        function KeyCloak() {
+            this.url='http://localhost:8080/auth/';
+            this.realm='TEST-REALM'
+            this.clientId='tutorial-test1';
+
+            this.subject='';
+
+            this.init = function() {
+                this.keycloak = new Keycloak({
+                    url: this.url,
+                    realm: this.realm,
+                    clientId: this.clientId,
+                });
+                this.keycloak.init().then(() => this.subject = this.keycloak.subject);
+            }
+
+            this.login = function() {
+                if(this.keycloak) {
+                    this.keycloak.login();
+                }
+            };
+
+            this.logout = function() {
+                if(this.keycloak) {
+                    this.keycloak.logout();
+                }
+            }
+        }
+    </script>
+</head>
+<body cjs-controller="test:KeyCloak:init">
+    <span cjs-binding-value="subject"></span>
+    <button cjs-binding-event="click:login">login</button>
+    <button cjs-binding-event="click:logout">logout</button>
+</body>
+</html>
