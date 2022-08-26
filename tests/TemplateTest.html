@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cJSv2 - Template Test</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.0/mustache.min.js" integrity="sha512-ZtynsaJmQRo6Ru0RHAPHnMfmTCLSTRcAoxbl5csw47H9EbEZWpns3URyVNgAvj6KQvEM6ysjTQZ3jj61go0NsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="../lib/cJS.js"></script>
+  <script>
+      function Example() {
+        this.raw = '';
+        this.list = [];
+
+        this.init = function() {
+          if(Mustache) {
+            console.log('mustache templating found!')
+          }
+        }
+
+        this.parse =  function() {
+          this.list = this.raw.split(/[,;]/);
+          console.log(this.list);
+        }
+      }
+  </script>
+</head>
+<body cjs-controller="test:Example:init">
+  <template id="listing">
+    <ul>
+      {{#data}}
+      <li>{{.}}</li>
+      {{/data}}
+    </ul>
+  </template>
+  <div>
+    <input type="text" cjs-binding-value="raw" cjs-binding-event="keyup:parse" placeholder="add list with ;"/>
+  </div>
+  <div cjs-binding-value="list" data-cjs-template="listing">
+
+  </div>
+</body>
+</html>
